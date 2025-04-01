@@ -51,10 +51,10 @@
 ## Пользователи
 
 ### Регистрация
-**POST** `/auth/register` — регистрация нового пользователя
+**POST** /auth/register — регистрация нового пользователя
 
 #### Тело запроса:
-```json
+json
 {
   "username": "user1",
   "email": "user1@example.com",
@@ -68,12 +68,12 @@
 **Ответ:**
 json
 
-`{
+{
   "id": 1,
   "username": "user1",
   "email": "user1@example.com",
   "created_at": "2025-03-18T14:30:00Z"
-}`
+}
 
 
 -Вход
