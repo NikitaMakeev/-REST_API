@@ -38,9 +38,9 @@
 
 ### Требования
 
-- Python 
+- Python
+- XAMPP
 - MySql 
-- Docker
 
 ### Установка
 
