@@ -65,15 +65,16 @@
 
 400 Bad Request — если данные неверны (например, email уже зарегистрирован)
 
-Ответ:
+**Ответ:**
 json
 
-{
+`{
   "id": 1,
   "username": "user1",
   "email": "user1@example.com",
   "created_at": "2025-03-18T14:30:00Z"
-}
+}`
+
 
 -Вход
 --POST /auth/login — вход пользователя
