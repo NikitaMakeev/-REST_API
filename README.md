@@ -48,5 +48,344 @@
 
 ## Примеры запросов API
 
--null
+///Пользователи
+
+Пользователи
+Регистрация
+POST /auth/register — регистрация нового пользователя
+Тело запроса:
+
+json
+Copy
+Edit
+{
+  "username": "user1",
+  "email": "user1@example.com",
+  "password": "password123"
+}
+Ответ:
+
+201 Created — успешная регистрация
+
+400 Bad Request — если данные неверны (например, email уже зарегистрирован)
+
+Ответ:
+
+json
+Copy
+Edit
+{
+  "id": 1,
+  "username": "user1",
+  "email": "user1@example.com",
+  "created_at": "2025-03-18T14:30:00Z"
+}
+Вход
+POST /auth/login — вход пользователя
+Тело запроса:
+
+json
+Copy
+Edit
+{
+  "email": "user1@example.com",
+  "password": "password123"
+}
+Ответ:
+
+200 OK — успешный вход
+
+401 Unauthorized — если неверные данные
+
+Ответ:
+
+json
+Copy
+Edit
+{
+  "token": "jwt_token_here"
+}
+Удаление пользователя
+DELETE /users/{user_id} — удаление пользователя
+Ответ:
+
+200 OK — успешное удаление
+
+404 Not Found — если пользователь не найден
+
+401 Unauthorized — если не авторизован
+
+Обновление данных пользователя
+PUT /users/{user_id} — обновление данных пользователя
+Тело запроса:
+
+json
+Copy
+Edit
+{
+  "username": "newuser1",
+  "email": "newuser1@example.com"
+}
+Ответ:
+
+200 OK — успешное обновление
+
+400 Bad Request — если данные неверны
+
+404 Not Found — если пользователь не найден
+
+Показать одного пользователя
+GET /users/{user_id} — получение данных пользователя
+Ответ:
+
+200 OK — успешное получение данных пользователя
+
+404 Not Found — если пользователь не найден
+
+Ответ:
+
+json
+Copy
+Edit
+{
+  "id": 1,
+  "username": "user1",
+  "email": "user1@example.com",
+  "created_at": "2025-03-18T14:30:00Z"
+}
+Показать всех пользователей
+GET /users — получение списка всех пользователей
+Ответ:
+
+200 OK — успешное получение данных
+
+Ответ:
+
+json
+Copy
+Edit
+[
+  {
+    "id": 1,
+    "username": "user1",
+    "email": "user1@example.com",
+    "created_at": "2025-03-18T14:30:00Z"
+  },
+  {
+    "id": 2,
+    "username": "user2",
+    "email": "user2@example.com",
+    "created_at": "2025-03-18T14:45:00Z"
+  }
+]
+
+///Достопримечательности
+//Далее все действия только за зарегестрированных пользователей
+
+Достопримечательности
+Добавление достопримечательности
+POST /attractions — добавление новой достопримечательности
+Тело запроса:
+
+json
+Copy
+Edit
+{
+  "name": "Eiffel Tower",
+  "description": "Iconic Parisian landmark",
+  "location": "Paris, France"
+}
+Ответ:
+
+201 Created — успешное добавление
+
+400 Bad Request — если данные неверны
+
+Ответ:
+
+json
+Copy
+Edit
+{
+  "id": 1,
+  "name": "Eiffel Tower",
+  "description": "Iconic Parisian landmark",
+  "location": "Paris, France",
+  "created_at": "2025-03-18T15:00:00Z"
+}
+Обновление достопримечательности
+PUT /attractions/{attraction_id} — обновление данных достопримечательности
+Тело запроса:
+
+json
+Copy
+Edit
+{
+  "name": "Eiffel Tower Updated",
+  "description": "Updated description",
+  "location": "Paris, France"
+}
+Ответ:
+
+200 OK — успешное обновление
+
+404 Not Found — если достопримечательность не найдена
+
+Удаление достопримечательности
+DELETE /attractions/{attraction_id} — удаление достопримечательности
+Ответ:
+
+200 OK — успешное удаление
+
+404 Not Found — если достопримечательность не найдена
+
+Показать одну достопримечательность
+GET /attractions/{attraction_id} — получение данных о достопримечательности
+Ответ:
+
+200 OK — успешное получение данных
+
+404 Not Found — если достопримечательность не найдена
+
+Ответ:
+
+json
+Copy
+Edit
+{
+  "id": 1,
+  "name": "Eiffel Tower",
+  "description": "Iconic Parisian landmark",
+  "location": "Paris, France",
+  "created_at": "2025-03-18T15:00:00Z"
+}
+Показать все достопримечательности
+GET /attractions — получение списка всех достопримечательностей
+Ответ:
+
+200 OK — успешное получение данных
+
+Ответ:
+
+json
+Copy
+Edit
+[
+  {
+    "id": 1,
+    "name": "Eiffel Tower",
+    "description": "Iconic Parisian landmark",
+    "location": "Paris, France"
+  },
+  {
+    "id": 2,
+    "name": "Colosseum",
+    "description": "Ancient Roman amphitheater",
+    "location": "Rome, Italy"
+  }
+]
+
+///Фото
+//Далее все действия только за зарегестрированных пользователей
+
+Фото
+Загрузка новой фотографии к достопримечательности
+POST /attractions/{attraction_id}/photos — загрузка новой фотографии
+Тело запроса:
+
+json
+Copy
+Edit
+{
+  "photo_url": "https://example.com/photo.jpg"
+}
+Ответ:
+
+201 Created — успешная загрузка
+
+400 Bad Request — если данные неверны
+
+Получение списка фотографий конкретной достопримечательности
+GET /attractions/{attraction_id}/photos — получение фотографий для достопримечательности
+Ответ:
+
+200 OK — успешное получение фотографий
+
+Ответ:
+
+json
+Copy
+Edit
+[
+  {
+    "photo_id": 1,
+    "photo_url": "https://example.com/photo1.jpg"
+  },
+  {
+    "photo_id": 2,
+    "photo_url": "https://example.com/photo2.jpg"
+  }
+]
+Удаление своей фотографии
+DELETE /photos/{photo_id} — удаление своей фотографии
+Ответ:
+
+200 OK — успешное удаление
+
+404 Not Found — если фотография не найдена
+
+
+///Рейтинг
+//Далее все действия только за зарегестрированных пользователей
+
+Рейтинг
+Добавление оценки к достопримечательности
+POST /attractions/{attraction_id}/rating — добавление оценки
+Тело запроса:
+
+json
+Copy
+Edit
+{
+  "rating": 4
+}
+Ответ:
+
+201 Created — успешная добавление оценки
+
+Получение средней оценки для достопримечательности
+GET /attractions/{attraction_id}/rating — получение средней оценки
+Ответ:
+
+200 OK — успешное получение средней оценки
+
+Ответ:
+
+json
+Copy
+Edit
+{
+  "average_rating": 4.5
+}
+Удаление или редактирование своей оценки
+PUT /attractions/{attraction_id}/rating — редактирование своей оценки
+DELETE /attractions/{attraction_id}/rating — удаление своей оценки
+Ответ:
+
+200 OK — успешное изменение или удаление
+
+///Фильтрация и сортировка
+
+Фильтрация и сортировка
+Фильтрация достопримечательностей по стране
+GET /attractions?country={country_name} — фильтрация по стране
+Ответ:
+
+200 OK — успешное получение данных
+
+Сортировка по рейтингу
+GET /attractions?sort=rating — сортировка по рейтингу
+Ответ:
+
+200 OK — успешное получение отсортированных данных
 
