@@ -38,13 +38,72 @@
 
 ### Требования
 
-- Python
-- XAMPP
-- MySql 
+- Python - https://www.python.org/
+- XAMPP  - https://www.apachefriends.org/
+- MySql - уже будет в XAMP  
 
-### Установка
+##  Установка и запуск
 
-- null
+### 1. Клонирование проекта
+
+```bash
+git clone https://github.com/your-username/LandMarks_FinalProject.git
+cd LandMarks_FinalProject
+```
+
+Или просто скачайте `.zip` архив и распакуйте.
+
+### 2. Установка виртуального окружения
+
+```bash
+python -m venv venv
+# Активация:
+# Windows:
+venv\Scripts\activate
+# Mac/Linux:
+source venv/bin/activate
+```
+
+### 3.  Установка зависимостей
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4.  Настройка .env
+
+Создайте файл `.env` в корне и добавьте:
+
+```
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=your_mysql_password
+DB_NAME=landmarks_db
+JWT_SECRET_KEY=your_secret_key
+JWT_ALGORITHM=HS256
+```
+
+>  Убедитесь, что MySQL-сервер запущен (например, через XAMPP → MySQL → "Start")
+
+### 5.  Создание базы данных
+
+Создайте базу данных вручную и заполните ее с помощью `createDB.py`.
+
+#### Вариант 1: вручную
+
+```sql
+CREATE DATABASE landmarks_db;
+```
+
+```bash
+python config/createDB.py
+```
+
+### 6.  Запуск сервера
+
+```bash
+uvicorn main:app --reload
+```
 
 ## Примеры запросов API
 
